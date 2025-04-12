@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './img/logo.svg'
+import logo from './img/logo.png'
 import backgroundVideo from './img/background.mp4';
 
 function App() {
