@@ -26,7 +26,7 @@ export default function Nav() {
   return (
     <>
       <nav id="nav" className={solid ? "solid" : ""}>
-        <a href="#" className="nav-logo">
+        <a href="/" className="nav-logo">
           <img src={logo} alt="AFTRMRKT" />
         </a>
         <ul className="nav-links">

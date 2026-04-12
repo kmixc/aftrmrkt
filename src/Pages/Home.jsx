@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+
+import Video from "../img/WebsiteCover.mov";
 
 /* ─── Reusable play-button SVG ─── */
 const PlayIcon = ({ size = 22 }) => (
@@ -65,7 +67,7 @@ export default function Home() {
                 >
                     <video autoPlay muted loop playsInline
                         poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=80">
-                        {/* <source src="assets/hero-reel.mp4" type="video/mp4" /> */}
+                        <source src={Video} type="video/mp4" />
                     </video>
                 </div>
                 <div className="hero-ov"></div>
@@ -86,8 +88,8 @@ export default function Home() {
                         the people who actually show up.
                     </p>
                     <div className="h-btns">
-                        <a href="#films" className="btn-red">Watch Films</a>
-                        <a href="#join" className="btn-ol">Join the Club</a>
+                        <a href="/" className="btn-red">Watch Films</a>
+                        <a href="/" className="btn-ol">Join the Club</a>
                     </div>
                 </div>
 
@@ -122,7 +124,7 @@ export default function Home() {
                         <div className="lbl">001 — Films</div>
                         <h2 className="disp">Featured<br />Films</h2>
                     </div>
-                    <a href="#" className="lnk rv d2">All Films</a>
+                    <a href="/" className="lnk rv d2">All Films</a>
                 </div>
 
                 {/* Hero Film */}
@@ -187,7 +189,6 @@ export default function Home() {
                 ))}
             </div>
 
-            {/* ── SPOTLIGHT ── */}
             <section className="sec" id="spotlight">
                 <div style={{ marginBottom: 52 }} className="rv">
                     <div className="lbl">002 — Spotlight</div>
@@ -211,7 +212,7 @@ export default function Home() {
                             E85 making north of 600 wheel horsepower — this isn't a show car. It was
                             built to move. Spotted at our last film shoot and impossible to ignore.
                         </p>
-                        <a href="#" className="lnk">Read the Full Feature</a>
+                        <a href="/" className="lnk">Read the Full Feature</a>
                         <div className="spec-grid">
                             <div className="spx"><span className="spk">Engine</span><span className="spv">RB26DETT</span></div>
                             <div className="spx"><span className="spk">Power</span><span className="spv">630 WHP</span></div>
@@ -229,7 +230,7 @@ export default function Home() {
                         <div className="lbl">003 — Media</div>
                         <h2 className="disp">Gallery</h2>
                     </div>
-                    <a href="#" className="lnk">View All</a>
+                    <a href="/" className="lnk">View All</a>
                 </div>
                 <div className="gal-grid">
                     {[
@@ -282,7 +283,7 @@ export default function Home() {
                         <p style={{ fontSize: 11, color: "rgba(253,252,250,.22)", letterSpacing: "1.5px", textTransform: "uppercase" }}>
                             Founded 2020 · Greater Toronto Area
                         </p>
-                        <a href="#join" className="btn-red" style={{ marginTop: 30, display: "inline-block" }}>
+                        <a href="/" className="btn-red" style={{ marginTop: 30, display: "inline-block" }}>
                             Get Involved
                         </a>
                     </div>
