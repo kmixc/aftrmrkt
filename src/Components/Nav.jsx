@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import logo from "../img/AFTRMRKT-white.png";
+
 export default function Nav() {
   const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,7 +27,7 @@ export default function Nav() {
     <>
       <nav id="nav" className={solid ? "solid" : ""}>
         <a href="#" className="nav-logo">
-          <img src="/assets/AFTRMRKT_White_Transparent.png" alt="AFTRMRKT" />
+          <img src={logo} alt="AFTRMRKT" />
         </a>
         <ul className="nav-links">
           <li><a href="#films">Films</a></li>
@@ -49,11 +51,11 @@ export default function Nav() {
 
       {/* Mobile menu */}
       <div className={`mob${menuOpen ? " open" : ""}`}>
-        <a href="#films"     className="ml" onClick={closeMenu}>Films</a>
+        <a href="#films" className="ml" onClick={closeMenu}>Films</a>
         <a href="#spotlight" className="ml" onClick={closeMenu}>Spotlight</a>
-        <a href="#gallery"   className="ml" onClick={closeMenu}>Gallery</a>
-        <a href="#about"     className="ml" onClick={closeMenu}>About</a>
-        <a href="#join"      className="ml" onClick={closeMenu} style={{ color: "var(--red)" }}>
+        <a href="#gallery" className="ml" onClick={closeMenu}>Gallery</a>
+        <a href="#about" className="ml" onClick={closeMenu}>About</a>
+        <a href="#join" className="ml" onClick={closeMenu} style={{ color: "var(--red)" }}>
           Join
         </a>
       </div>

@@ -1,0 +1,90 @@
+/*
+  Cursor.module.css
+  Scoped styles for the AFTRMRKT custom cursor.
+  Relies on --red being defined in your global CSS (e.g. index.css or App.css):
+
+    :root {
+      --red: #DC2026;
+    }
+*/
+
+/* Hide the native cursor globally when this component mounts.
+   Add this rule to your global CSS instead if you prefer: body { cursor: none; } */
+:global(body) {
+    cursor: none;
+}
+
+/* ── Dot ─────────────────────────────────────────── */
+.dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    /* Use translate() in JS — no top/left offset needed */
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    /* center on pointer */
+    margin-top: -5px;
+
+    background: var(--red, #DC2026);
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 99999;
+
+    /* blend makes it pop over dark and light surfaces */
+    mix-blend-mode: exclusion;
+
+    opacity: 0;
+    transition: width 0.15s ease, height 0.15s ease,
+        margin 0.15s ease, opacity 0.3s ease;
+    will-change: transform;
+}
+
+.dot.visible {
+    opacity: 1;
+}
+
+.dot.dotBig {
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+/* ── Ring ────────────────────────────────────────── */
+.ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 34px;
+    height: 34px;
+    margin-left: -17px;
+    margin-top: -17px;
+
+    border: 1px solid rgba(253, 252, 250, 0.3);
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 99998;
+
+    opacity: 0;
+    transition: width 0.2s ease, height 0.2s ease,
+        margin 0.2s ease, border-color 0.2s ease,
+        opacity 0.3s ease;
+    will-change: transform;
+}
+
+.ring.visible {
+    opacity: 1;
+}
+
+.ring.ringBig {
+    width: 54px;
+    height: 54px;
+    margin-left: -27px;
+    margin-top: -27px;
+    border-color: var(--red, #DC2026);
+}

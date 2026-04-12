@@ -1,34 +1,29 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //PAGES
-
+import Home from './Pages/Home';
+import NotFound from './Pages/NotFound';
 
 //COMPONENTS
-import Navbar from './components/Navbar';
-import ScrollToTop from './components/ScrollToTop.jsx'
-import PageTransition from './components/PageTransition';
-import Redirect from './components/redirect.jsx';
+import Nav from './Components/Nav';
+import Footer from './Components/Footer';
+import Cursor from './Components/Cursor';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <ScrollToTop />
-      <PageTransition />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/projects' element={<Projects />} />
-        <Route path="/projects/:projectId" element={<ProjectDetail />} />
-        <Route path='/services' element={<Services />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/contactcard' element={<ContactCard />} />
-        <Route path='/dist/redirect.html' element={<Redirect />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </>
+    <div className="App">
+      <Cursor />
+      <Nav />
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

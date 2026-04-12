@@ -1,9 +1,13 @@
+import React from 'react'
+
+import logo from "../img/AFTRMRKT-white.png";
+
 export default function Footer() {
   return (
     <footer>
       <div className="ft-grid">
         <div className="ft-brand">
-          <img src="/assets/AFTRMRKT_White_Transparent.png" alt="AFTRMRKT" />
+          <img src={logo} alt="AFTRMRKT" />
           <p>
             Automotive culture, original films, and community for those who live it
             after hours. GTA-based. Culture-first.
@@ -57,5 +61,5 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-  );
+  )
 }
