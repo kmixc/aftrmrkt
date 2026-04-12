@@ -5,7 +5,6 @@ import Video from "../img/WebsiteCover.mov";
 //IMAGES
 import NSX from "../img/content/Jaiden-NSX.jpg"
 import EVO from "../img/content/EVO_1.jpg"
-import EVO2 from "../img/content/EVO_3.jpg"
 import RWB from "../img/content/RWB_1.jpg"
 import RWB2 from "../img/content/Porsche_RWB_Elrod.jpg"
 import LFA from "../img/content/LFA_1.jpg"
