@@ -2,6 +2,15 @@ import { useEffect } from "react";
 
 import Video from "../img/WebsiteCover.mov";
 
+//IMAGES
+import NSX from "../img/content/Jaiden-NSX.jpg"
+import EVO from "../img/content/EVO_1.jpg"
+import EVO2 from "../img/content/EVO_3.jpg"
+import RWB from "../img/content/RWB_1.jpg"
+import RWB2 from "../img/content/Porsche_RWB_Elrod.jpg"
+import LFA from "../img/content/LFA_1.jpg"
+import BMW from "../img/content/BMW_2.jpg"
+
 /* ─── Reusable play-button SVG ─── */
 const PlayIcon = ({ size = 22 }) => (
     <svg viewBox="0 0 24 24" width={size} height={size} style={{ fill: "var(--lotion)", marginLeft: size > 18 ? 4 : 3 }}>
@@ -59,14 +68,13 @@ export default function Home() {
                 <div
                     className="hero-vw"
                     style={{
-                        backgroundImage:
-                            "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=80')",
+                        backgroundImage: EVO,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
                 >
                     <video autoPlay muted loop playsInline
-                        poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=80">
+                        poster={EVO}>
                         <source src={Video} type="video/mp4" />
                     </video>
                 </div>
@@ -144,7 +152,7 @@ export default function Home() {
                                         <circle cx="12" cy="12" r="10" />
                                         <path d="M12 6v6l4 2" />
                                     </svg>
-                                    24 MIN
+                                    9 MIN
                                 </span>
                             </div>
                         </div>
@@ -157,9 +165,9 @@ export default function Home() {
                 {/* Film Grid */}
                 <div className="film-grid" style={{ marginTop: 3 }}>
                     {[
-                        { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=700&q=80", tag: "Short Film", title: "Cold Start", meta: "2024 · 8 Min", delay: "" },
-                        { src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=700&q=80", tag: "Documentary", title: "Night Frequency", meta: "2023 · 18 Min", delay: " d1" },
-                        { src: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=700&q=80", tag: "Short Film", title: "Open Headers", meta: "2023 · 11 Min", delay: " d2" },
+                        { src: EVO, tag: "Short Film", title: "Cold Start", meta: "2024 · 8 Min", delay: "" },
+                        { src: RWB, tag: "Documentary", title: "Night Frequency", meta: "2023 · 18 Min", delay: " d1" },
+                        { src: NSX, tag: "Short Film", title: "Open Headers", meta: "2023 · 11 Min", delay: " d2" },
                     ].map(({ src, tag, title, meta, delay }) => (
                         <div key={title} className={`fc rv${delay}`}>
                             <img src={src} alt={title} />
@@ -197,7 +205,7 @@ export default function Home() {
                 <div className="sp-wrap">
                     <div className="sp-img rv">
                         <img
-                            src="https://images.unsplash.com/photo-1596638787647-904d822d751e?w=900&q=80"
+                            src={NSX}
                             alt="Build of the Month"
                         />
                         <div className="sp-badge">Build of the Month</div>
@@ -234,12 +242,12 @@ export default function Home() {
                 </div>
                 <div className="gal-grid">
                     {[
-                        { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1000&q=80", delay: "" },
-                        { src: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=80", delay: " d1" },
-                        { src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80", delay: " d2" },
-                        { src: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80", delay: " d1" },
-                        { src: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&q=80", delay: " d2" },
-                        { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=80", delay: " d3" },
+                        { src: EVO, delay: "" },
+                        { src: RWB, delay: " d1" },
+                        { src: NSX, delay: " d2" },
+                        { src: LFA, delay: " d1" },
+                        { src: BMW, delay: " d2" },
+                        { src: RWB2, delay: " d3" },
                     ].map(({ src, delay }, i) => (
                         <div key={i} className={`gi rv${delay}`}>
                             <img src={src} alt="" />

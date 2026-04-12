@@ -215,7 +215,7 @@ nav.solid {
 .hero-c {
   position: relative;
   z-index: 4;
-  padding: 0 60px 90px 64px;
+  padding: 0 60px 0px 64px;
   max-width: 860px;
 }
 
