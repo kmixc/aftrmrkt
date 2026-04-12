@@ -128,15 +128,15 @@ export default function Home() {
                 </div>
 
                 {/* Hero Film */}
-                <div className="film-hero rv">
+                <div className="film-hero rv" onClick={() => window.open("https://www.youtube.com/watch?v=IG-4rTJkrhs&t=17s", "_blank")}>
                     <img
-                        src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1600&q=80"
-                        alt="Afterburn — Season 3"
+                        src="https://img.youtube.com/vi/IG-4rTJkrhs/maxresdefault.jpg"
+                        alt="IMPORT FEST — 2025"
                     />
                     <div className="fh-ov">
                         <div>
-                            <span className="f-tag">{"// Featured Film — 2024"}</span>
-                            <div className="f-title">Afterburn — Season 3</div>
+                            <span className="f-tag">{"// Featured Film — 2025"}</span>
+                            <div className="f-title">IMPORT FEST — 2025</div>
                             <div className="f-meta">
                                 Documentary
                                 <span className="f-dur">
