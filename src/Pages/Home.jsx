@@ -135,7 +135,7 @@ export default function Home() {
                     />
                     <div className="fh-ov">
                         <div>
-                            <span className="f-tag">// Featured Film — 2024</span>
+                            <span className="f-tag">{"// Featured Film — 2024"}</span>
                             <div className="f-title">Afterburn — Season 3</div>
                             <div className="f-meta">
                                 Documentary
@@ -164,7 +164,7 @@ export default function Home() {
                         <div key={title} className={`fc rv${delay}`}>
                             <img src={src} alt={title} />
                             <div className="fc-ov">
-                                <div className="fc-tag">// {tag}</div>
+                                <div className="fc-tag">{"// " + tag}</div>
                                 <div className="fc-title">{title}</div>
                                 <div className="fc-meta">{meta}</div>
                             </div>
