@@ -8,8 +8,6 @@ const NAV_LINKS = [
     { label: "ABOUT", href: "#about" },
 ];
 
-const SOCIALS = ["Instagram", "Twitter", "LinkedIn"];
-
 const MenuPanel = forwardRef(function MenuPanel(
     { navItemsRef, closeBtnRef, onLinkClick, onClose },
     ref
