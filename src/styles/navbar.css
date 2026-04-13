@@ -1,0 +1,457 @@
+/* ============================================================
+   TOKENS & RESET
+   ============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap");
+
+:root {
+    /* ── Brand colors ── */
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark2: #181818;
+    --dark3: #222222;
+    --grey: #555;
+    --grey2: #888;
+    --red: #e90008;
+
+    /* ── Semantic aliases ── */
+    --c-bg: var(--black);
+    --c-surface: var(--dark);
+    --c-panel: var(--dark2);
+    --c-text: #f0ede8;
+    --c-text-dim: var(--grey2);
+    --c-accent: var(--red);
+    --c-border: rgba(255, 255, 255, 0.06);
+
+    /* ── Layout ── */
+    --panel-w: 38vw;
+
+    /* ── Typography ── */
+    --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* ── Easing ── */
+    --ease-luxury: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-fast: 0.2s;
+    --dur-med: 0.5s;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   MENU PANEL — right side, behind page
+   ============================================================ */
+.menu-panel {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: var(--panel-w);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.menu-panel__bg {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.menu-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 90% 95%,
+            rgba(233, 0, 8, 0.07) 0%,
+            transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.menu-panel[style*="opacity: 1"],
+.menu-panel[style*="opacity:1"] {
+    pointer-events: auto;
+}
+
+.menu-panel__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.5rem 4rem 3.5rem;
+}
+
+/* ── Close button (top of panel, fades in via GSAP) ── */
+.menu-panel__close {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    align-self: flex-end;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--grey2);
+    padding: 0.45rem 0.75rem 0.45rem 0.6rem;
+    margin-bottom: 3rem;
+    transition:
+        color var(--dur-fast) var(--ease-luxury),
+        border-color var(--dur-fast) var(--ease-luxury),
+        background var(--dur-fast) var(--ease-luxury);
+    /* GSAP controls opacity/scale — start state set in JS */
+}
+
+.menu-panel__close:hover {
+    color: var(--red);
+    border-color: rgba(233, 0, 8, 0.4);
+    background: rgba(233, 0, 8, 0.05);
+}
+
+.menu-panel__close svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+.menu-panel__close-label {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.menu-panel__eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 3rem;
+}
+
+/* ── Nav list ── */
+.menu-panel__nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menu-panel__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.menu-panel__item {
+    overflow: hidden;
+}
+
+.menu-panel__link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    color: var(--c-text);
+    position: relative;
+    transition: color var(--dur-fast) var(--ease-luxury);
+}
+
+.menu-panel__link:hover {
+    color: var(--red);
+}
+
+.menu-link__index {
+    font-family: var(--font-body);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+    min-width: 1.4rem;
+    position: relative;
+    top: -0.1em;
+    transition: color var(--dur-fast) var(--ease-luxury);
+}
+
+.menu-panel__link:hover .menu-link__index {
+    color: var(--red);
+}
+
+.menu-link__label {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+    font-weight: bolder;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.menu-link__line {
+    position: absolute;
+    bottom: 0.3rem;
+    left: 2.4rem;
+    right: 0;
+    height: 1px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-med) var(--ease-luxury);
+}
+
+.menu-panel__link:hover .menu-link__line {
+    transform: scaleX(1);
+}
+
+/* ── Footer ── */
+.menu-panel__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--c-border);
+}
+
+.menu-panel__socials {
+    list-style: none;
+    display: flex;
+    gap: 1.4rem;
+}
+
+.menu-panel__social-link {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey2);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-luxury);
+}
+
+.menu-panel__social-link:hover {
+    color: var(--red);
+}
+
+.menu-panel__copy {
+    font-size: 0.62rem;
+    color: var(--grey);
+    white-space: nowrap;
+}
+
+/* ============================================================
+   PAGE CONTENT
+   ============================================================ */
+.page-content {
+    position: relative;
+    z-index: 20;
+    min-height: 100vh;
+    background: var(--c-surface);
+    transform-origin: right center;
+    will-change: transform, box-shadow, border-radius;
+    overflow: hidden;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.8rem 2.8rem;
+    transition:
+        background var(--dur-med) var(--ease-luxury),
+        padding var(--dur-med) var(--ease-luxury),
+        border-color var(--dur-med) var(--ease-luxury);
+    border-bottom: 1px solid transparent;
+}
+
+.navbar--scrolled {
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    padding: 1.1rem 2.8rem;
+    border-bottom-color: var(--c-border);
+}
+
+/* ── Logo ── */
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--c-text);
+}
+
+.logo-dot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+}
+
+/* ── Social icon links ── */
+.navbar__links {
+    list-style: none;
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+}
+
+.navbar__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--grey2);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-luxury),
+        transform var(--dur-fast) var(--ease-luxury);
+}
+
+.navbar__social-link:hover {
+    color: var(--c-text);
+    transform: translateY(-2px);
+}
+
+.navbar__social-link svg {
+    display: block;
+}
+
+/* ── Navbar hamburger (open trigger — fades OUT via GSAP) ── */
+.hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--c-text);
+    padding: 0.5rem 0.55rem;
+    position: relative;
+    z-index: 200;
+    transition:
+        color var(--dur-fast) var(--ease-luxury),
+        border-color var(--dur-fast) var(--ease-luxury),
+        background var(--dur-fast) var(--ease-luxury);
+}
+
+.hamburger:hover {
+    color: var(--red);
+    border-color: rgba(233, 0, 8, 0.4);
+    background: rgba(233, 0, 8, 0.05);
+}
+
+.hamburger__svg {
+    display: block;
+    overflow: visible;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    :root {
+        --panel-w: 82vw;
+    }
+
+    .navbar {
+        padding: 1.3rem 1.5rem;
+    }
+
+    .navbar--scrolled {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar__links {
+        display: none;
+    }
+
+    .menu-panel__inner {
+        padding: 2rem 2.5rem 2.5rem;
+    }
+
+    .menu-link__label {
+        font-size: clamp(2.2rem, 10vw, 3rem);
+    }
+
+    .menu-panel__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 1.1rem 1.2rem;
+    }
+
+    .logo-text {
+        font-size: 1.05rem;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.navbar__logo img {
+    height: 30px;
+    width: auto;
+    display: block;
+    transition: opacity .2s;
+}
