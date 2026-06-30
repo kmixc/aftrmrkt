@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import MenuPanel from "./Menupanel";
 import "../styles/navbar.css";
@@ -105,10 +106,10 @@ export default function Nav({ children }) {
         ref={navbarRef}
         className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
       >
-        <a className="navbar__logo" href="/">
+        <Link className="navbar__logo" to="/">
           <span className="logo-dot" aria-hidden="true" />
           <img src={logo} alt="AFTRMRKT" />
-        </a>
+        </Link>
 
         <ul className="navbar__links">
           <li>

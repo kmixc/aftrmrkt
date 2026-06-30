@@ -1,0 +1,163 @@
+/* ── PAGE HERO ── */
+.films-page .pg-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 420px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.pg-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 30%;
+    filter: brightness(.45) saturate(.7);
+}
+
+.pg-hero-ov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, .2) 65%, transparent 100%);
+    z-index: 1;
+}
+
+.pg-hero-c {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px 72px;
+}
+
+.pg-hero-title {
+    font-size: clamp(52px, 8vw, 120px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: .88;
+    letter-spacing: -3px;
+    margin: 14px 0 16px;
+}
+
+.pg-red {
+    color: var(--red);
+}
+
+.pg-hero-sub {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(253, 252, 250, .4);
+    max-width: 420px;
+}
+
+/* ── FILTERS ── */
+.films-filters {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 28px 60px;
+    border-bottom: 1px solid var(--dark3);
+    flex-wrap: wrap;
+}
+
+.flt-btn {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(253, 252, 250, .38);
+    background: none;
+    border: 1px solid rgba(253, 252, 250, .1);
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+}
+
+.flt-btn:hover {
+    color: var(--lotion);
+    border-color: rgba(253, 252, 250, .3);
+}
+
+.flt-active {
+    color: var(--lotion) !important;
+    border-color: var(--red) !important;
+    background: rgba(233, 0, 8, .08);
+}
+
+.flt-count {
+    margin-left: auto;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(253, 252, 250, .2);
+}
+
+/* ── FILMS SECTION ── */
+.films-pg-sec {
+    padding: 0 60px 80px;
+}
+
+.films-pg-sec .film-hero {
+    margin-top: 3px;
+}
+
+/* ── CTA ── */
+.films-cta {
+    background: var(--dark);
+    border-top: 1px solid var(--dark3);
+    text-align: center;
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.films-cta::before {
+    content: 'FILMS';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(253, 252, 250, .022);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.films-cta-in {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.films-cta-in .disp {
+    text-align: center;
+}
+
+/* ── SCROLL REVEAL ── */
+.rv {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .65s ease, transform .65s ease;
+}
+
+.rv.on {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rv.d1 {
+    transition-delay: .12s;
+}
+
+.rv.d2 {
+    transition-delay: .22s;
+}
+
+.rv.d3 {
+    transition-delay: .32s;
+}

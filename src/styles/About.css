@@ -1,0 +1,262 @@
+/* ── HERO ── */
+.about-page {
+    min-height: 100vh;
+}
+
+.abt-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.abt-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(.55) saturate(.8);
+}
+
+.abt-hero-ov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(92deg, rgba(10, 10, 10, .85) 0%, rgba(10, 10, 10, .35) 55%, transparent 100%);
+    z-index: 1;
+}
+
+.abt-hero-c {
+    position: relative;
+    z-index: 2;
+    padding: 0 64px;
+    max-width: 840px;
+}
+
+.abt-hero-title {
+    font-size: clamp(40px, 6vw, 90px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -3px;
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: up .85s .4s forwards;
+}
+
+.abt-red {
+    color: var(--red);
+}
+
+.abt-blue {
+    color: var(--blue);
+}
+
+/* ── ORIGIN ── */
+.abt-origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-bottom: 72px;
+}
+
+.abt-origin-body {
+    padding-top: 8px;
+}
+
+.abt-founded {
+    font-size: 10px;
+    color: rgba(253, 252, 250, .2);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* ── IMAGE ROW ── */
+.abt-img-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3px;
+    align-items: start;
+}
+
+.abt-img-l img,
+.abt-img-r img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(.75) saturate(.8);
+}
+
+.abt-img-l img {
+    height: 520px;
+}
+
+.abt-img-r {
+    position: relative;
+}
+
+.abt-img-r img {
+    height: 360px;
+}
+
+.abt-img-badge {
+    margin-top: 3px;
+    background: var(--red);
+    color: var(--lotion);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    display: inline-block;
+}
+
+/* ── TIMELINE ── */
+.abt-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+}
+
+.abt-timeline::before {
+    content: '';
+    position: absolute;
+    left: 84px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--dark3);
+}
+
+.abt-tl-item {
+    display: grid;
+    grid-template-columns: 84px 20px 1fr;
+    gap: 0 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--dark3);
+}
+
+.abt-tl-item:last-child {
+    border-bottom: none;
+}
+
+.abt-tl-year {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(253, 252, 250, .22);
+    padding-top: 4px;
+    text-align: right;
+    padding-right: 24px;
+}
+
+.abt-tl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--black);
+    outline: 1px solid var(--red);
+    margin-top: 5px;
+    position: relative;
+    left: -4px;
+}
+
+.abt-tl-body {
+    padding-left: 0;
+}
+
+.abt-tl-label {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -.2px;
+    color: var(--lotion);
+    margin-bottom: 6px;
+}
+
+.abt-tl-desc {
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(253, 252, 250, .38);
+    max-width: 500px;
+}
+
+/* ── VALUES ── */
+.abt-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+}
+
+.abt-val {
+    background: var(--dark2);
+    padding: 48px 44px;
+    border-left: 3px solid transparent;
+    transition: border-color .25s;
+}
+
+.abt-val:hover {
+    border-color: var(--red);
+}
+
+.abt-val-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+}
+
+.abt-val-title {
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -.4px;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    color: var(--lotion);
+}
+
+.abt-val-body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(253, 252, 250, .38);
+}
+
+/* ── SCROLL REVEAL ── */
+.rv {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .65s ease, transform .65s ease;
+}
+
+.rv.on {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rv.d1 {
+    transition-delay: .12s;
+}
+
+.rv.d2 {
+    transition-delay: .22s;
+}
+
+.rv.d3 {
+    transition-delay: .32s;
+}
+
+@keyframes up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

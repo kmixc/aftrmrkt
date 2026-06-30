@@ -1,0 +1,37 @@
+/* ── Page transition overlay ────────────────────────────── */
+.page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    top: -20px;
+    background: #0a0a0a;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+    box-shadow: 0 150px 0 0 #e90008;
+}
+
+
+.page-transition-logo {
+    width: clamp(160px, 40vw, 220px);
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
+
+.page-transition-tagline {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #444;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+}

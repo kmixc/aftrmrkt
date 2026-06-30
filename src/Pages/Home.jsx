@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Video from "../img/WebsiteCover.mov";
 
@@ -9,6 +11,15 @@ import RWB from "../img/content/RWB_1.jpg"
 import RWB2 from "../img/content/Porsche_RWB_Elrod.jpg"
 import LFA from "../img/content/LFA_1.jpg"
 import BMW from "../img/content/BMW_2.jpg"
+
+const GALLERY_IMAGES = [
+    { src: EVO },
+    { src: RWB },
+    { src: NSX },
+    { src: LFA },
+    { src: BMW },
+    { src: RWB2 },
+];
 
 /* ─── Reusable play-button SVG ─── */
 const PlayIcon = ({ size = 22 }) => (
@@ -30,35 +41,47 @@ function useReveal() {
     }, []);
 }
 
-/* ─── Animated counter hook ─── */
-function useCounters() {
-    useEffect(() => {
-        const co = new IntersectionObserver(
-            (entries) =>
-                entries.forEach((e) => {
-                    if (!e.isIntersecting) return;
-                    const el = e.target;
-                    const n = +el.dataset.n;
-                    const t0 = performance.now();
-                    const dur = 1600;
-                    (function step(now) {
-                        const p = Math.min((now - t0) / dur, 1);
-                        const ease = 1 - Math.pow(1 - p, 3);
-                        el.textContent = Math.round(ease * n).toLocaleString();
-                        if (p < 1) requestAnimationFrame(step);
-                    })(t0);
-                    co.unobserve(el);
-                }),
-            { threshold: 0.5 }
-        );
-        document.querySelectorAll(".sn").forEach((el) => co.observe(el));
-        return () => co.disconnect();
-    }, []);
-}
-
 export default function Home() {
     useReveal();
-    useCounters();
+
+    const location = useLocation();
+    useEffect(() => {
+        if (location.hash) {
+            const el = document.querySelector(location.hash);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [location.hash]);
+
+    const [lightbox, setLightbox] = useState({ open: false, index: 0 });
+
+    const openLightbox = useCallback((i) => {
+        setLightbox({ open: true, index: i });
+        document.body.style.overflow = "hidden";
+    }, []);
+
+    const closeLightbox = useCallback(() => {
+        setLightbox((s) => ({ ...s, open: false }));
+        document.body.style.overflow = "";
+    }, []);
+
+    const prevImage = useCallback(() =>
+        setLightbox((s) => ({ ...s, index: (s.index - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length }))
+    , []);
+
+    const nextImage = useCallback(() =>
+        setLightbox((s) => ({ ...s, index: (s.index + 1) % GALLERY_IMAGES.length }))
+    , []);
+
+    useEffect(() => {
+        if (!lightbox.open) return;
+        const onKey = (e) => {
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowLeft") prevImage();
+            if (e.key === "ArrowRight") nextImage();
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [lightbox.open, closeLightbox, prevImage, nextImage]);
 
     return (
         <main>
@@ -95,7 +118,7 @@ export default function Home() {
                         the people who actually show up.
                     </p>
                     <div className="h-btns">
-                        <a href="/" className="btn-red">Watch Films</a>
+                        <a href="#films" className="btn-red">Watch Films</a>
                         <a href="/" className="btn-ol">Join the Club</a>
                     </div>
                 </div>
@@ -131,27 +154,27 @@ export default function Home() {
                         <div className="lbl">001 — Films</div>
                         <h2 className="disp">Featured<br />Films</h2>
                     </div>
-                    <a href="/" className="lnk rv d2">All Films</a>
+                    <a href="#films" className="lnk rv d2">All Films</a>
                 </div>
 
                 {/* Hero Film */}
-                <div className="film-hero rv" onClick={() => window.open("https://www.youtube.com/watch?v=IG-4rTJkrhs&t=17s", "_blank")}>
+                <div className="film-hero rv" onClick={() => window.open("https://www.youtube.com/watch?v=0Rn0R20hn1o", "_blank")}>
                     <img
-                        src="https://img.youtube.com/vi/IG-4rTJkrhs/maxresdefault.jpg"
-                        alt="IMPORT FEST — 2025"
+                        src="https://img.youtube.com/vi/0Rn0R20hn1o/maxresdefault.jpg"
+                        alt="Shayne's R32 GTR — Feature Film"
                     />
                     <div className="fh-ov">
                         <div>
-                            <span className="f-tag">{"// Featured Film — 2025"}</span>
-                            <div className="f-title">IMPORT FEST — 2025</div>
+                            <span className="f-tag">{"// First Feature Film — AFTRMRKT"}</span>
+                            <div className="f-title">Shayne's R32 GTR</div>
                             <div className="f-meta">
-                                Documentary
+                                1992 Nissan Skyline R32 GTR
                                 <span className="f-dur">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="10">
                                         <circle cx="12" cy="12" r="10" />
                                         <path d="M12 6v6l4 2" />
                                     </svg>
-                                    9 MIN
+                                    Watch Now
                                 </span>
                             </div>
                         </div>
@@ -164,11 +187,11 @@ export default function Home() {
                 {/* Film Grid */}
                 <div className="film-grid" style={{ marginTop: 3 }}>
                     {[
-                        { src: EVO, tag: "Short Film", title: "Cold Start", meta: "2024 · 8 Min", delay: "" },
-                        { src: RWB, tag: "Documentary", title: "Night Frequency", meta: "2023 · 18 Min", delay: " d1" },
-                        { src: NSX, tag: "Short Film", title: "Open Headers", meta: "2023 · 11 Min", delay: " d2" },
-                    ].map(({ src, tag, title, meta, delay }) => (
-                        <div key={title} className={`fc rv${delay}`}>
+                        { src: EVO, tag: "Short Film", title: "Cold Start", meta: "2024 · 8 Min", delay: "", yt: null },
+                        { src: "https://img.youtube.com/vi/IG-4rTJkrhs/hqdefault.jpg", tag: "Documentary", title: "Import Fest — 2025", meta: "2025 · 9 Min", delay: " d1", yt: "https://www.youtube.com/watch?v=IG-4rTJkrhs&t=17s" },
+                        { src: NSX, tag: "Short Film", title: "Open Headers", meta: "2023 · 11 Min", delay: " d2", yt: null },
+                    ].map(({ src, tag, title, meta, delay, yt }) => (
+                        <div key={title} className={`fc rv${delay}`} onClick={() => yt && window.open(yt, "_blank")} style={{ cursor: yt ? "pointer" : "default" }}>
                             <img src={src} alt={title} />
                             <div className="fc-ov">
                                 <div className="fc-tag">{"// " + tag}</div>
@@ -180,21 +203,6 @@ export default function Home() {
                     ))}
                 </div>
             </section>
-
-            {/* ── STATS ── */}
-            <div className="stats">
-                {[
-                    { n: 2400, label: "Members", delay: "" },
-                    { n: 18, label: "Films Produced", delay: " d1" },
-                    { n: 5, label: "Seasons", delay: " d2" },
-                    { n: 12, label: "Cities Featured", delay: " d3" },
-                ].map(({ n, label, delay }) => (
-                    <div key={label} className={`sc rv${delay}`}>
-                        <span className="sn" data-n={n}>0</span>
-                        <span className="sl">{label}</span>
-                    </div>
-                ))}
-            </div>
 
             <section className="sec" id="spotlight">
                 <div style={{ marginBottom: 52 }} className="rv">
@@ -212,19 +220,19 @@ export default function Home() {
                     <div className="rv d2">
                         <div className="lbl">Member Spotlight</div>
                         <h3 className="disp" style={{ fontSize: "clamp(32px,3.8vw,56px)" }}>
-                            2003 Nissan<br />Skyline R34
+                            1991 Honda<br />NSX
                         </h3>
                         <p className="bod" style={{ marginTop: 14, marginBottom: 24 }}>
-                            Marcus K's R34 has been a decade in the making. Running a built RB26 on
-                            E85 making north of 600 wheel horsepower — this isn't a show car. It was
-                            built to move. Spotted at our last film shoot and impossible to ignore.
+                            Jaiden Z's NSX is one of the most unique builds in the scene — running a
+                            twincharged setup that combines a supercharger and turbo on the C30A. A
+                            mid-engine monster that sounds as wild as it looks.
                         </p>
-                        <a href="/" className="lnk">Read the Full Feature</a>
+                        <a href="#spotlight" className="lnk">Read the Full Feature</a>
                         <div className="spec-grid">
-                            <div className="spx"><span className="spk">Engine</span><span className="spv">RB26DETT</span></div>
-                            <div className="spx"><span className="spk">Power</span><span className="spv">630 WHP</span></div>
-                            <div className="spx"><span className="spk">Fuel</span><span className="spv">E85</span></div>
-                            <div className="spx"><span className="spk">Weight</span><span className="spv">1,280 KG</span></div>
+                            <div className="spx"><span className="spk">Engine</span><span className="spv">C30A Twincharged</span></div>
+                            <div className="spx"><span className="spk">Setup</span><span className="spv">Turbo + Supercharged</span></div>
+                            <div className="spx"><span className="spk">Layout</span><span className="spv">Mid-Engine RWD</span></div>
+                            <div className="spx"><span className="spk">Owner</span><span className="spv">Jaiden Z</span></div>
                         </div>
                     </div>
                 </div>
@@ -237,19 +245,12 @@ export default function Home() {
                         <div className="lbl">003 — Media</div>
                         <h2 className="disp">Gallery</h2>
                     </div>
-                    <a href="/" className="lnk">View All</a>
+                    <a href="#gallery" className="lnk">View All</a>
                 </div>
                 <div className="gal-grid">
-                    {[
-                        { src: EVO, delay: "" },
-                        { src: RWB, delay: " d1" },
-                        { src: NSX, delay: " d2" },
-                        { src: LFA, delay: " d1" },
-                        { src: BMW, delay: " d2" },
-                        { src: RWB2, delay: " d3" },
-                    ].map(({ src, delay }, i) => (
-                        <div key={i} className={`gi rv${delay}`}>
-                            <img src={src} alt="" />
+                    {[" ", " d1", " d2", " d1", " d2", " d3"].map((delay, i) => (
+                        <div key={i} className={`gi rv${delay}`} onClick={() => openLightbox(i)} style={{ cursor: "pointer" }}>
+                            <img src={GALLERY_IMAGES[i].src} alt="" />
                             <div className="gi-ov">
                                 <div className="gi-x">
                                     <svg viewBox="0 0 24 24" strokeWidth="1.5">
@@ -296,6 +297,33 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* ── LIGHTBOX ── */}
+            {lightbox.open && createPortal(
+                <div className="lb-backdrop" onClick={closeLightbox}>
+                    <button className="lb-close" onClick={closeLightbox} aria-label="Close">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                            <line x1="4" y1="4" x2="20" y2="20" />
+                            <line x1="20" y1="4" x2="4" y2="20" />
+                        </svg>
+                    </button>
+                    <button className="lb-arrow lb-arrow--prev" onClick={(e) => { e.stopPropagation(); prevImage(); }} aria-label="Previous">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <div className="lb-img-wrap" onClick={(e) => e.stopPropagation()}>
+                        <img src={GALLERY_IMAGES[lightbox.index].src} alt="" className="lb-img" />
+                    </div>
+                    <button className="lb-arrow lb-arrow--next" onClick={(e) => { e.stopPropagation(); nextImage(); }} aria-label="Next">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                    <div className="lb-counter">{lightbox.index + 1} / {GALLERY_IMAGES.length}</div>
+                </div>,
+                document.body
+            )}
 
             {/* ── JOIN / CTA ── */}
             <section className="cta-sec" id="join">

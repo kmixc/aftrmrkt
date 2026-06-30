@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import logo from "../img/AFTRMRKT-white.png";
 
@@ -13,9 +14,9 @@ export default function Footer() {
             after hours. GTA-based. Culture-first.
           </p>
           <div className="ft-soc">
-            <a href="/" className="fs">IG</a>
-            <a href="/" className="fs">TT</a>
-            <a href="/" className="fs">YT</a>
+            <a href="https://www.instagram.com/aftrmrkt.co/" className="fs" target="_blank" rel="noopener noreferrer">IG</a>
+            <a href="https://www.tiktok.com/@aftrmrkt.co" className="fs" target="_blank" rel="noopener noreferrer">TT</a>
+            <a href="https://www.youtube.com/@AFTRMRKTCLUB" className="fs" target="_blank" rel="noopener noreferrer">YT</a>
             <a href="/" className="fs">Discord</a>
           </div>
         </div>
@@ -23,19 +24,19 @@ export default function Footer() {
         <div className="ft-col">
           <h5>Content</h5>
           <ul>
-            <li><a href="/">Films</a></li>
-            <li><a href="/">Short Films</a></li>
-            <li><a href="/">Documentaries</a></li>
-            <li><a href="/">Gallery</a></li>
+            <li><Link to="/films">Films</Link></li>
+            <li><Link to="/films">Short Films</Link></li>
+            <li><Link to="/films">Documentaries</Link></li>
+            <li><Link to="/gallery">Gallery</Link></li>
           </ul>
         </div>
 
         <div className="ft-col">
           <h5>Community</h5>
           <ul>
-            <li><a href="/">Car Spotlights</a></li>
-            <li><a href="/">Member Builds</a></li>
-            <li><a href="/">Submit Your Build</a></li>
+            <li><Link to="/spotlight">Car Spotlights</Link></li>
+            <li><Link to="/spotlight">Member Builds</Link></li>
+            <li><Link to="/spotlight">Submit Your Build</Link></li>
             <li><a href="/">Forum</a></li>
           </ul>
         </div>
@@ -44,7 +45,7 @@ export default function Footer() {
           <h5>Club</h5>
           <ul>
             <li><a href="/">Join AFTRMRKT</a></li>
-            <li><a href="/">About</a></li>
+            <li><Link to="/about">About</Link></li>
             <li><a href="/">Contact</a></li>
             <li><a href="/">Partnerships</a></li>
           </ul>

@@ -1,11 +1,12 @@
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
 const NAV_LINKS = [
-    { label: "FILMS", href: "#films" },
-    { label: "SPOTLIGHT", href: "#spotlight" },
-    { label: "GALLERY", href: "#gallery" },
-    { label: "ABOUT", href: "#about" },
+    { label: "FILMS", href: "/#films", scroll: true },
+    { label: "SPOTLIGHT", href: "/#spotlight", scroll: true },
+    { label: "GALLERY", href: "/#gallery", scroll: true },
+    { label: "ABOUT", href: "/about", scroll: false },
 ];
 
 const MenuPanel = forwardRef(function MenuPanel(
@@ -43,11 +44,11 @@ const MenuPanel = forwardRef(function MenuPanel(
                                 className="menu-panel__item"
                                 ref={(el) => (navItemsRef.current[i] = el)}
                             >
-                                <a href={href} className="menu-panel__link" onClick={onLinkClick}>
+                                <Link to={href} className="menu-panel__link" onClick={onLinkClick}>
                                     <span className="menu-link__index">0{i + 1}</span>
                                     <span className="menu-link__label">{label}</span>
                                     <span className="menu-link__line" aria-hidden="true" />
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
